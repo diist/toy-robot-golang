@@ -71,6 +71,10 @@ func Right(robot *Robot) *Robot {
 	return &Robot{robot.X, robot.Y, new_direction}
 }
 
+func Report(robot *Robot) string {
+	return fmt.Sprintf("%d,%d,%s", robot.X, robot.Y, robot.Direction)
+}
+
 func isValidPosition(x int, y int) bool {
 	table := table.NewTable()
 	if x > table.MaxX || x < 0 || y > table.MaxY || y < 0 {
