@@ -75,3 +75,13 @@ func TestRight(t *testing.T) {
 		t.Errorf("Robot has not turned right")
 	}
 }
+
+func TestReport(t *testing.T) {
+	robot, err := Place(0, 0, "NORTH")
+	if err != nil {
+		t.Errorf("There should be no error")
+	}
+	if Report(robot) != "0,0,NORTH" {
+		t.Errorf("Report doesn't work")
+	}
+}
