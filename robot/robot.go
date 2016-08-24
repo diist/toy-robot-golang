@@ -39,6 +39,38 @@ func Move(robot *Robot) *Robot {
 	return &Robot{x, y, direction}
 }
 
+func Left(robot *Robot) *Robot {
+	var new_direction string
+
+	switch robot.Direction {
+	case "NORTH":
+		new_direction = "WEST"
+	case "EAST":
+		new_direction = "NORTH"
+	case "SOUTH":
+		new_direction = "EAST"
+	case "WEST":
+		new_direction = "SOUTH"
+	}
+	return &Robot{robot.X, robot.Y, new_direction}
+}
+
+func Right(robot *Robot) *Robot {
+	var new_direction string
+
+	switch robot.Direction {
+	case "NORTH":
+		new_direction = "EAST"
+	case "EAST":
+		new_direction = "SOUTH"
+	case "SOUTH":
+		new_direction = "WEST"
+	case "WEST":
+		new_direction = "NORTH"
+	}
+	return &Robot{robot.X, robot.Y, new_direction}
+}
+
 func isValidPosition(x int, y int) bool {
 	table := table.NewTable()
 	if x > table.MaxX || x < 0 || y > table.MaxY || y < 0 {
