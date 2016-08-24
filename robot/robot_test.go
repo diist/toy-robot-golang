@@ -53,3 +53,25 @@ func TestMoveEdge(t *testing.T) {
 		t.Errorf("Robot should not move")
 	}
 }
+
+func TestLeft(t *testing.T) {
+	robot, err := Place(0, 0, "NORTH")
+	if err != nil {
+		t.Errorf("There should be no error")
+	}
+	robot = Left(robot)
+	if robot.Direction != "WEST" {
+		t.Errorf("Robot has not turned left")
+	}
+}
+
+func TestRight(t *testing.T) {
+	robot, err := Place(0, 0, "NORTH")
+	if err != nil {
+		t.Errorf("There should be no error")
+	}
+	robot = Right(robot)
+	if robot.Direction != "EAST" {
+		t.Errorf("Robot has not turned right")
+	}
+}
