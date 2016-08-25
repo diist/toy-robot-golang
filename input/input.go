@@ -1,8 +1,10 @@
 package input
 
 import (
+	"bufio"
 	"fmt"
 	"github.com/diist/toy-robot-golang/robot"
+	"os"
 	"regexp"
 	"strconv"
 	"strings"
@@ -20,6 +22,20 @@ func PlayWithFile(filename string) {
 	}
 }
 
+func PlayWithCLI() {
+	var my_robot *robot.Robot
+	var err error
+	reader := bufio.NewReader(os.Stdin)
+	for {
+		commandWithLineReturn, _ := reader.ReadString('\n')
+		command := strings.TrimSpace(commandWithLineReturn)
+		my_robot, err = runCommand(command, my_robot)
+		if err != nil {
+			fmt.Println(err)
+		}
+	}
+}
+
 func runCommand(command string, my_robot *robot.Robot) (*robot.Robot, error) {
 	if regexp.MustCompile("PLACE [0-9]+,[0-9]+,[A-Z]+").MatchString(command) {
 		return runPlaceCommand(command, my_robot)
@@ -27,7 +43,6 @@ func runCommand(command string, my_robot *robot.Robot) (*robot.Robot, error) {
 	if my_robot == nil {
 		return nil, fmt.Errorf("You must first PLACE the robot")
 	}
-
 	switch {
 	case command == "MOVE":
 		return robot.Move(my_robot), nil
@@ -41,7 +56,6 @@ func runCommand(command string, my_robot *robot.Robot) (*robot.Robot, error) {
 	case command == "" || command == "\n":
 		return my_robot, nil
 	}
-
 	return my_robot, fmt.Errorf("Command not recognized: %s", command)
 }
 
