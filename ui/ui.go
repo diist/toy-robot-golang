@@ -11,7 +11,17 @@ import (
 	"strings"
 )
 
-func PlayWithFile(filename string) {
+func Play(filename string) {
+	if filename != "" {
+		fmt.Printf("Playing with the file: %q \n\n", filename)
+		playWithFile(filename)
+	} else {
+		fmt.Println("Playing with the CLI\n")
+		playWithCLI()
+	}
+}
+
+func playWithFile(filename string) {
 	var my_robot *robot.Robot
 	var err error
 	commands := linesFromFile(filename)
@@ -23,7 +33,7 @@ func PlayWithFile(filename string) {
 	}
 }
 
-func PlayWithCLI() {
+func playWithCLI() {
 	var my_robot *robot.Robot
 	var err error
 	reader := bufio.NewReader(os.Stdin)
