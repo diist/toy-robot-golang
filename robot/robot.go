@@ -12,7 +12,7 @@ type Robot struct {
 }
 
 func Place(x int, y int, direction string) (*Robot, error) {
-	if !isValidPosition(x, y) {
+	if !table.IsValidPosition(x, y) {
 		return nil, fmt.Errorf("invalid position")
 	}
 	return &Robot{x, y, direction}, nil
@@ -31,7 +31,7 @@ func Move(robot *Robot) *Robot {
 	case "WEST":
 		x -= 1
 	}
-	if !isValidPosition(x, y) {
+	if !table.IsValidPosition(x, y) {
 		return robot
 	}
 	return &Robot{x, y, direction}
@@ -47,12 +47,4 @@ func Right(robot *Robot) *Robot {
 
 func Report(robot *Robot) string {
 	return fmt.Sprintf("%d,%d,%s", robot.X, robot.Y, robot.Direction)
-}
-
-func isValidPosition(x int, y int) bool {
-	table := table.NewTable()
-	if x > table.MaxX || x < 0 || y > table.MaxY || y < 0 {
-		return false
-	}
-	return true
 }
