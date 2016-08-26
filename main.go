@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/diist/toy-robot-golang/input"
+	"github.com/diist/toy-robot-golang/ui"
 	"os"
 )
 
@@ -11,9 +11,9 @@ func main() {
 	filename := os.Getenv("ROBOT_FILE")
 	if filename != "" {
 		fmt.Printf("Playing with the file: %q \n", filename)
-		input.PlayWithFile(filename)
+		ui.PlayWithFile(filename)
 	} else {
 		fmt.Println("Playing with the CLI")
-		input.PlayWithCLI()
+		ui.PlayWithCLI()
 	}
 }

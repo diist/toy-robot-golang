@@ -1,4 +1,4 @@
-package input
+package ui
 
 import (
 	"github.com/diist/toy-robot-golang/robot"
