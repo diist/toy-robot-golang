@@ -22,16 +22,6 @@ func TestPlaceBadPosition(t *testing.T) {
 	}
 }
 
-func TestPlaceBadDirection(t *testing.T) {
-	robot, err := Place(2, 2, "WARBLE")
-	if err == nil {
-		t.Errorf("There should be an error here")
-	}
-	if robot != nil {
-		t.Errorf("Robot should be nil")
-	}
-}
-
 func TestMove(t *testing.T) {
 	robot, err := Place(0, 0, "NORTH")
 	if err != nil {

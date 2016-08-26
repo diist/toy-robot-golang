@@ -2,6 +2,7 @@ package robot
 
 import (
 	"fmt"
+	"github.com/diist/toy-robot-golang/direction"
 	"github.com/diist/toy-robot-golang/table"
 )
 
@@ -13,9 +14,6 @@ type Robot struct {
 func Place(x int, y int, direction string) (*Robot, error) {
 	if !isValidPosition(x, y) {
 		return nil, fmt.Errorf("invalid position")
-	}
-	if !isValidDirection(direction) {
-		return nil, fmt.Errorf("invalid direction")
 	}
 	return &Robot{x, y, direction}, nil
 }
@@ -40,35 +38,11 @@ func Move(robot *Robot) *Robot {
 }
 
 func Left(robot *Robot) *Robot {
-	var new_direction string
-
-	switch robot.Direction {
-	case "NORTH":
-		new_direction = "WEST"
-	case "EAST":
-		new_direction = "NORTH"
-	case "SOUTH":
-		new_direction = "EAST"
-	case "WEST":
-		new_direction = "SOUTH"
-	}
-	return &Robot{robot.X, robot.Y, new_direction}
+	return &Robot{robot.X, robot.Y, direction.Left(robot.Direction)}
 }
 
 func Right(robot *Robot) *Robot {
-	var new_direction string
-
-	switch robot.Direction {
-	case "NORTH":
-		new_direction = "EAST"
-	case "EAST":
-		new_direction = "SOUTH"
-	case "SOUTH":
-		new_direction = "WEST"
-	case "WEST":
-		new_direction = "NORTH"
-	}
-	return &Robot{robot.X, robot.Y, new_direction}
+	return &Robot{robot.X, robot.Y, direction.Right(robot.Direction)}
 }
 
 func Report(robot *Robot) string {
@@ -81,16 +55,4 @@ func isValidPosition(x int, y int) bool {
 		return false
 	}
 	return true
-}
-
-func isValidDirection(direction string) bool {
-	switch direction {
-	case
-		"NORTH",
-		"EAST",
-		"SOUTH",
-		"WEST":
-		return true
-	}
-	return false
 }

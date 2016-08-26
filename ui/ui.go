@@ -3,6 +3,7 @@ package ui
 import (
 	"bufio"
 	"fmt"
+	"github.com/diist/toy-robot-golang/direction"
 	"github.com/diist/toy-robot-golang/robot"
 	"os"
 	"regexp"
@@ -70,8 +71,11 @@ func runPlaceCommand(command string, my_robot *robot.Robot) (*robot.Robot, error
 	if err != nil {
 		panic(err)
 	}
-	direction := args[2]
-	new_robot, err := robot.Place(x, y, direction)
+	placing_direction := args[2]
+	if !direction.IsValidDirection(placing_direction) {
+		return my_robot, fmt.Errorf("Invalid Direction")
+	}
+	new_robot, err := robot.Place(x, y, placing_direction)
 	if err != nil {
 		return my_robot, fmt.Errorf("Invalid PLACE command")
 	}
